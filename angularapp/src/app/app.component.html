@@ -1,0 +1,39 @@
+﻿
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Warehouse Jobs App</span>
+  <span class="example-spacer"></span>
+  <button 
+    mat-icon-button 
+    class="example-icon favorite-icon" 
+    aria-label="Example icon-button with heart icon"
+    >
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button 
+    mat-icon-button 
+    class="example-icon" 
+    aria-label="Example icon-button with share icon"
+    (click)="showJobs()"
+    >
+    <mat-icon 
+      [matBadge]="unseenScannedJobs"  
+      matBadgePosition="after" 
+      matBadgeColor="accent">add_alert</mat-icon>
+    <span class="cdk-visually-hidden">
+      Icon with overlaid badge showing the number of scanned boxes
+    </span>
+  </button>
+</mat-toolbar>
+<div style="display: flex;">
+  <app-warehouse-jobs-info 
+    #warehouseinfo 
+    style="flex-grow: 1;"
+    (JobFullyScanned)="onFullyScannedJob($event)"
+    (SwitchedToQRScan)="onSwitchedToQRScan()" />
+  <app-qrscanner 
+    *ngIf="isScanByCamera" 
+    (ScanQRCode)="warehouseinfo.onSubmitByCamera($event)" />
+</div>

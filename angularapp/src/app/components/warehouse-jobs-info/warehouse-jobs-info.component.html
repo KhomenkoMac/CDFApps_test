@@ -1,0 +1,87 @@
+<mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>
+        <p id="someLabel" class="mat-h2" >CHK20230508-1</p>
+      </mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form #boxForm class="example-form" (keydown.enter)="$event.preventDefault();onSubmit()">
+            <mat-form-field  class="example-full-width">
+                <mat-label>Box reference</mat-label>
+                <input #manualBoxReference="matInput" matInput placeholder="enter or scan with button ->" [formControl]="boxReference">
+            </mat-form-field>
+            <button class="scan-btn" type="button" mat-fab color="primary"
+             [disabled]="manualBoxReference.focused"
+             (click)="onClickedScan()">
+                <mat-icon>scanner</mat-icon>
+            </button>
+        </form>
+        <table mat-table 
+            [dataSource]="dataSource" 
+            class="mat-elevation-z1 demo-table"
+            >
+            <!-- Position Column -->
+            <ng-container matColumnDef="#">
+                <th mat-header-cell *matHeaderCellDef>No.</th>
+                <td mat-cell *matCellDef="let element">{{element.number}}</td>
+            </ng-container>
+            
+            <!-- Name Column -->
+            <ng-container matColumnDef="Warehouse job reference">
+                <th mat-header-cell *matHeaderCellDef>Warehouse job reference</th>
+                <td mat-cell *matCellDef="let element">{{element.warehouseJobReference}}</td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Box reference">
+                <th mat-header-cell *matHeaderCellDef>Box reference</th>
+                <td mat-cell *matCellDef="let element">{{element.boxReference}}</td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Condition">
+                <th mat-header-cell *matHeaderCellDef>Condition</th>
+                <td mat-cell *matCellDef="let element">
+                        {{element.condition}}
+                    <!-- <ng-template #selectBoxCondition>
+                        <mat-form-field  appearance="fill">
+                            <mat-label>Select an option</mat-label>
+                            <mat-select [(value)]="element.condition">
+                                <mat-option value="broken">Broken</mat-option>
+                                <mat-option value="good">Good</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </ng-template> -->
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+                mat-row
+                [ngClass]="{'make-gold': row == selectedRow}"
+                (click)="clickedRows.add(row);onSelected(row)"
+                *matRowDef="let row; columns: displayedColumns;"
+            ></tr>
+        </table>  
+        <form class="updateConditionForm" *ngIf="selectedRow">
+            <mat-form-field appearance="fill">
+                <mat-label>Favorite food</mat-label>
+                <mat-select (selectionChange)="selectedRow.conditionChanged = true" [(ngModel)]="selectedRow.condition" name="condition" #condition="ngModel">
+                  <mat-option *ngFor="let condition of boxConditions" [value]="condition.value">
+                    {{condition.viewValue}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button class="scan-btn" type="button" mat-fab color="primary"
+             [disabled]="!selectedRow.conditionChanged"
+             (click)="onUpdateBoxCondition()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </form>
+    </mat-card-content>
+    
+</mat-card>
+
+
+

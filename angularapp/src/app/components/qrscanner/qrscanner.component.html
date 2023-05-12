@@ -1,0 +1,14 @@
+<div class="card_container">
+    <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>
+                <p id="someLabel" class="mat-h2" >QR Scan</p>
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <zxing-scanner (scanSuccess)="onScanned($event)"></zxing-scanner>
+        <mat-card-content>
+            <p class="mat-small">Now you are using your camera to scan QR-code </p>
+        </mat-card-content>
+    </mat-card>
+</div>

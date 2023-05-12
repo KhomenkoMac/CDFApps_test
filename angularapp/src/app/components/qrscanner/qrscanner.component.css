@@ -1,0 +1,15 @@
+.card_container{
+    margin-top: 10dvh;
+    display: flex;
+    justify-content: center;
+}
+
+zxing-scanner{
+    height: 400px;
+    min-width: 500px;
+}
+
+.card{
+    max-width: 500px;
+    min-height: 500px;
+}

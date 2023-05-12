@@ -1,0 +1,18 @@
+<!-- <div *ngFor="let item in data.fullyScannedJobs">
+    {{item}}
+</div> -->
+<h1 mat-dialog-title>All Received Warehouse jobs</h1>
+<div mat-dialog-content>
+    <ul>
+        <li *ngFor="let item of data.fullyScannedJobs">{{item}}</li>
+    </ul>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+</div>
+<!-- 
+<ul>
+    <li >
+        
+    </li>
+</ul> -->
